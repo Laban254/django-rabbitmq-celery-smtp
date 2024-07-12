@@ -1,0 +1,1 @@
+# django-rabbitmq-celery-smtp
