@@ -30,7 +30,7 @@ This README outlines the steps to deploy a Django project using Gunicorn, Nginx,
 - RabbitMQ
 - Celery
 - ngrok
-- Virtual environment (optional but recommended)
+- Virtual environment 
 
 ## Step 1: Setting Up Your Django Project
 
