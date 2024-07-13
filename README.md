@@ -6,10 +6,11 @@ This README outlines the steps to deploy a Django project using Gunicorn, Nginx,
 
 
 
-gunicorn --bind 0.0.0.0:8003  messaging_system.wsgi
-celery -A messaging_system worker -l info
+```gunicorn --bind 0.0.0.0:8003  messaging_system.wsgi```
 
-cat /var/log/messaging_system.log
+   ``` celery -A messaging_system worker -l info```
+
+```cat /var/log/messaging_system.log```
 
 
 
@@ -44,7 +45,7 @@ cat /var/log/messaging_system.log
     ```python
     # settings.py
     import os
-
+    from decouple import config
 
     SECRET_KEY = config('SECRET_KEY')
 
@@ -57,7 +58,8 @@ cat /var/log/messaging_system.log
 
     # Celery configuration
     CELERY_BROKER_URL = 'amqp://localhost'
-    CELERY_RESULT_BACKEND = 'rpc://'
+    CELERY_RESULT_BACKEND = 'django-db'
+
     ```
 
 3. Collect static files:
@@ -114,7 +116,7 @@ cat /var/log/messaging_system.log
 5. **Start Celery worker:**
 
     ```bash
-    celery -A project worker --loglevel=info
+    celery -A messaging_system worker --loglevel=info
     ```
 
 ## Step 3: Running Gunicorn
@@ -136,7 +138,7 @@ cat /var/log/messaging_system.log
 1. Create an Nginx configuration file for your project:
 
     ```bash
-    sudo nano /etc/nginx/sites-available/django_project
+    sudo nano /etc/nginx/sites-available/default
     ```
 
 2. Add the following configuration:
