@@ -44,15 +44,9 @@ cat /var/log/messaging_system.log
     ```python
     # settings.py
     import os
-    from django.core.exceptions import ImproperlyConfigured
 
-    def get_env_variable(var_name):
-        try:
-            return os.environ[var_name]
-        except KeyError:
-            raise ImproperlyConfigured(f"The {var_name} setting must not be empty.")
 
-    SECRET_KEY = get_env_variable('SECRET_KEY')
+    SECRET_KEY = config('SECRET_KEY')
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATIC_URL = '/static/'
@@ -116,25 +110,7 @@ cat /var/log/messaging_system.log
     __all__ = ('celery_app',)
     ```
 
-4. **Create a Celery task:**
-
-    ```python
-    # app/tasks.py
-    from celery import shared_task
-    from django.core.mail import send_mail
-    from django.conf import settings
-
-    @shared_task
-    def send_email_task(email):
-        send_mail(
-            'HNG TASK',
-            'Messaging System with RabbitMQ/Celery and Python Application behind Nginx',
-            settings.EMAIL_HOST_USER,
-            [email],
-            fail_silently=False,
-        )
-    ```
-
+5. **creat a task:**
 5. **Start Celery worker:**
 
     ```bash
@@ -152,7 +128,7 @@ cat /var/log/messaging_system.log
 2. Start Gunicorn:
 
     ```bash
-    gunicorn --bind 0.0.0.0:8002 project.wsgi
+    gunicorn --bind 0.0.0.0:8002 messaging_system.wsgi
     ```
 
 ## Step 4: Configuring Nginx
@@ -171,7 +147,7 @@ cat /var/log/messaging_system.log
         listen [::]:80 default_server;
 
         location / {
-            proxy_pass http://127.0.0.1:8002;
+            proxy_pass http://127.0.0.1:8000;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
