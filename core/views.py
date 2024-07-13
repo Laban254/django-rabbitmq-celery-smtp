@@ -18,15 +18,15 @@ def send_message(request):
     talktome = 'talktome' in request.GET
 
     if sendmail and talktome:
-        email = sendmail  # Assuming sendmail contains the email address
-        send_email_task.delay(email)  # Queue the email sending task
-        log_time()  # Log the current time
+        email = sendmail  
+        send_email_task.delay(email)  
+        log_time() 
         return JsonResponse({'status': 'Email queued and current time logged successfully'})
 
     elif sendmail:
-        email = sendmail  # Assuming sendmail contains the email address
-        send_email_task.delay(email)  # Queue the email sending task
-        log_time()  # Log the current time
+        email = sendmail 
+        send_email_task.delay(email) 
+        log_time() 
         return JsonResponse({'status': 'Email queued successfully'})
 
     elif talktome:
