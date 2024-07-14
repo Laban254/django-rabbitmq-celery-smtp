@@ -26,17 +26,17 @@ def send_message(request):
     if sendmail and talktome:
         email = sendmail  
         send_email_task.delay(email)  
-        log_time('talktome')  # log 'talktome' message
+        log_time('talktome')  
         return JsonResponse({'status': 'Email queued and current time logged successfully'})
 
     elif sendmail:
         email = sendmail 
         send_email_task.delay(email) 
-        log_time()  # log default message
+        log_time()  
         return JsonResponse({'status': 'Email queued successfully'})
 
     elif talktome:
-        log_time('talktome')  # log 'talktome' message
+        log_time('talktome') 
         return JsonResponse({'status': 'Current time logged successfully'})
 
     else:
