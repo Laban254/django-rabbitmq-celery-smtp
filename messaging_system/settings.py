@@ -153,37 +153,74 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Logging
-import os
+# import os
 
-log_dir = '/var/log/'
-os.makedirs(log_dir, exist_ok=True)
+# log_dir = '/var/log/'
+# os.makedirs(log_dir, exist_ok=True)
 
-# settings.py
+# # settings.py
 
-# settings.py
+# # settings.py
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'time_logger_file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': '/var/log/messaging_system.log',
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'core': {
-            'handlers': ['time_logger_file'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(asctime)s - %(levelname)s - %(message)s'
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'time_logger_file': {
+#             'level': 'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename': '/var/log/messaging_system.log',
+#             'formatter': 'verbose',
+#         },
+#     },
+#     'loggers': {
+#         'core': {
+#             'handlers': ['time_logger_file'],
+#             'level': 'INFO',
+#             'propagate': False,
+#         },
+#     },
+#     'formatters': {
+#         'verbose': {
+#             'format': '%(asctime)s - %(levelname)s - %(message)s'
+#         },
+#     },
+# }
