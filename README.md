@@ -138,7 +138,7 @@ This README outlines the steps to deploy a Django project using Gunicorn, Nginx,
 1. Create an Nginx configuration file for your project:
 
     ```bash
-    sudo nano /etc/nginx/sites-available/default
+    sudo vi /etc/nginx/sites-available/default
     ```
 
 2. Add the following configuration:
