@@ -26,22 +26,21 @@ def send_message(request):
     if sendmail and talktome:
         email = sendmail  
         send_email_task.delay(email)  
-        log_time('talktome')  with talktome message
+        log_time('talktome')  # log 'talktome' message
         return JsonResponse({'status': 'Email queued and current time logged successfully'})
 
     elif sendmail:
         email = sendmail 
         send_email_task.delay(email) 
-        log_time() 
+        log_time()  # log default message
         return JsonResponse({'status': 'Email queued successfully'})
 
     elif talktome:
-        log_time('talktome')
+        log_time('talktome')  # log 'talktome' message
         return JsonResponse({'status': 'Current time logged successfully'})
 
     else:
         return JsonResponse({'error': 'No valid parameters provided'}, status=400)
-
 
 def view_log_file(request):
     log_file_path = '/var/log/messaging_system.log'
@@ -53,4 +52,3 @@ def view_log_file(request):
         log_content = log_file.read()
 
     return HttpResponse(log_content, content_type='text/plain')
-
